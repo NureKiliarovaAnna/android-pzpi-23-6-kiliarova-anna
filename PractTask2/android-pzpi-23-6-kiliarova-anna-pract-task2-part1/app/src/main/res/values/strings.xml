@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">android-pzpi-23-6-kiliarova-anna-pract-task2-part1</string>
+    <string name="update_text">Update Text</string>
+    <string name="show_message">Show Message</string>
+    <string name="text_a">First Label</string>
+    <string name="text_b">Second Label</string>
+    <string name="action1">Action 1</string>
+    <string name="action2">Action 2</string>
+    <string name="icon">App Icon</string>
+</resources>
