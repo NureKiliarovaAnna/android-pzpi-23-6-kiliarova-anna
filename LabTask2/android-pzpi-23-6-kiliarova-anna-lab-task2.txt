@@ -1,0 +1,288 @@
+﻿Міністерство освіти  і науки України
+Харківський національний університет радіоелектроніки
+
+
+
+Кафедра ПІ
+
+
+
+
+
+Звіт
+з лабораторної роботи №2
+з дисципліни «Програмування під Android»
+   
+
+
+
+
+
+Виконала:                                                                         Перевірив:
+ст. гр. ПЗПІ-23-6                        				ст. викладач кафедри ПІ
+Кілярова А. П.						          Сокорчук І. П.
+
+
+
+
+
+
+
+Харків 2024
+
+ЗАВДАННЯ
+     Розробити редактор, у якому з допомогою трьох регуляторів SeekBar встановлюється колір панелі.
+     Регулятори визначають RGB компоненти кольору панелі. Зовнішній вигляд екрану редактора повинен залежати від орієнтації пристроя. У портретній орієнтації пристроя, регулятори повинні знаходитися знизу від панелі, займати 1/3 висоти і розташовуватися на всю ширину екрану. У ланшафтній – праворуч від панелі і займати 1/3 ширини. Решту екрану повинна займати кольорова панель.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ХІД РОБОТИ
+     Створюємо розмітку для портретної та ландшафтної орієнтацій, а також 3 регулятори seekBar, які відповідатимуть за зміну кольору на панелі [ДОДАТОК А].
+     Вирівнюємо згідно умови завдання та аналогічно створюємо розмітку для ландшафтної орієнтації [ДОДАТОК Б].
+     Коли розмітки було створено, можна переходити до основного наповнення. Відкриваємо MainActivity.java.
+     Створюємо змінні для панелі відображення кольору та трьох повзунків:
+1. private View colorPanel;
+2. private SeekBar seekBarRed, seekBarGreen, seekBarBlue;
+
+     Знаходимо панель і повзунки за їх ідентифікаторами:
+1. colorPanel = findViewById(R.id.color_panel);
+2. seekBarRed = findViewById(R.id.seekBarRed);
+3. seekBarGreen = findViewById(R.id.seekBarGreen);
+4. seekBarBlue = findViewById(R.id.seekBarBlue);
+     Створюємо слухача OnSeekBarChangeListener, в якому метод onProgressChanged використовується для оновлення значення кольору:
+1. SeekBar.OnSeekBarChangeListener colorChangeListener = new
+2. 	SeekBar.OnSeekBarChangeListener() {
+3.  @Override
+4.  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+5.     updateColorPanel();
+6. }
+ 7.
+ 8. @Override
+ 9. public void onStartTrackingTouch(SeekBar seekBar) {}
+10.
+11. @Override
+12. public void onStopTrackingTouch(SeekBar seekBar) {}
+13. };
+     Додаємо слухача до кожного повзунка. Реалізуємо метод updateColorPanel(), який отримує поточні значення RGB із повзунків за допомогою getProgress. Потім об'єднуємо ці значення в один колір через android.graphics.Color.rgb і застосовуємо його як фон для панелі. [ДОДАТОК В]
+     
+ВИСНОВКИ
+Під час лабораторної роботи було закріплено знання з обробки подій при використанні регуляторів та відображення змін на екрані за допомогою елемента View.
+Відеозвіт на YouTube. URL: https://youtu.be/yxUgYXfyXmk?si=fGTZMz5rcj86MpYP
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ВИКОРИСТАНІ ДЖЕРЕЛА
+1. Документація SeekBar Android developers. URL: https://developer.android.com/reference/android/widget/SeekBar (дата звернення: 25.12.2024)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК А
+     Файл розмітки для портерної орієнтаціїї:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <View
+        android:id="@+id/color_panel"
+        android:layout_width="411dp"
+        android:layout_height="22dp"
+        android:layout_weight="2"
+        android:background="#000000" />
+
+    <LinearLayout
+        android:id="@+id/seekbars_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <SeekBar
+            android:id="@+id/seekBarRed"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:max="255"
+            android:progress="0" />
+
+        <SeekBar
+            android:id="@+id/seekBarGreen"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:max="255"
+            android:progress="0" />
+
+        <SeekBar
+            android:id="@+id/seekBarBlue"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:max="255"
+            android:progress="0" />
+
+    </LinearLayout>
+</LinearLayout>
+
+ДОДАТОК Б
+     Файл розмітки для ландшафтної орієнтаціїї:
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <View
+        android:id="@+id/color_panel"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="#000000" />
+
+    <LinearLayout
+        android:id="@+id/seekbars_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <SeekBar
+            android:id="@+id/seekBarRed"
+            android:layout_width="match_parent"
+            android:layout_height="151dp"
+            android:max="255"
+            android:progress="0" />
+
+        <SeekBar
+            android:id="@+id/seekBarGreen"
+            android:layout_width="match_parent"
+            android:layout_height="96dp"
+            android:max="255"
+            android:progress="0" />
+
+        <SeekBar
+            android:id="@+id/seekBarBlue"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:max="255"
+            android:progress="0" />
+
+    </LinearLayout>
+</LinearLayout>
+
+ДОДАТОК В
+     Код програми:
+package com.example.android_pzpi_23_6_kiliarova_anna_lab_task2;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.SeekBar;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private View colorPanel;
+    private SeekBar seekBarRed, seekBarGreen, seekBarBlue;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_main);
+
+        colorPanel = findViewById(R.id.color_panel);
+        seekBarRed = findViewById(R.id.seekBarRed);
+        seekBarGreen = findViewById(R.id.seekBarGreen);
+        seekBarBlue = findViewById(R.id.seekBarBlue);
+
+        SeekBar.OnSeekBarChangeListener colorChangeListener = new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                updateColorPanel();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        };
+
+        seekBarRed.setOnSeekBarChangeListener(colorChangeListener);
+        seekBarGreen.setOnSeekBarChangeListener(colorChangeListener);
+        seekBarBlue.setOnSeekBarChangeListener(colorChangeListener);
+    }
+
+    private void updateColorPanel() {
+        int red = seekBarRed.getProgress();
+        int green = seekBarGreen.getProgress();
+        int blue = seekBarBlue.getProgress();
+
+        int color = android.graphics.Color.rgb(red, green, blue);
+        colorPanel.setBackgroundColor(color);
+    }
+}
+
+
+
+2
+
+
