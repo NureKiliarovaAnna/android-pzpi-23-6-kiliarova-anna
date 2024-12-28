@@ -1,0 +1,638 @@
+﻿Міністерство освіти і науки України
+Харківський національний університет радіоелектроніки
+
+
+
+Кафедра ПІ
+
+
+
+
+Звіт
+з лабораторної роботи №4
+з дисципліни «Програмування під Android»
+   
+
+
+
+
+
+Виконала:                                                                   Перевірив:
+ст. гр. ПЗПІ-23-6                        		             ст. викладач кафедри ПІ
+Кілярова А. П.						   Сокорчук І. П.
+
+
+
+
+
+
+
+
+Харків 2024
+ЗАВДАННЯ
+     Розробити застосунок для ведення нотаток.
+     Застосунок повинен дозволяти переглядати список нотаток, створювати нову нотатку, редагувати нотатку та видаляти нотатку. Кожна нотатка повинна мати назву, опис, важливість (три класи), час і дату призначення і картинку (вибирається з галереї).
+     У списку нотатки відображаються з іконкою з галереї і часом створення (праворуч зверху більш дрібним шрифтом), а також графічним відображенням класу важливості (іконка з множини).
+     Потрібно реалізувати функції додавання, видалення, редагування (без збереження між перезапуск додатку) нотаток.
+     Видалення/редагування викликаються з контекстного меню при довгому натисненні, додавання - з основного меню в ActionBar. У ActionBar реалізувати пошук / фільтрація заміток за змістом тексту, а також фільтрацію за важливістю. Текстові елементи користувацького інтерфейсу повинні бути локалізовані українською та англійською мовами.
+
+
+ХІД РОБОТИ
+     1. Створення класу Note
+     Для зберігання інформації про нотатки створено клас Note. Він містить наступні поля:
+1. public class Note implements Serializable {
+2.    private String title;
+3.    private String description;
+4.    private int priority; 
+5.    private String dateTime;
+6.    private String imagePath;
+7.    public Note(String title, String description, int priority, String dateTime, String imagePath) {
+8.       this.title = title;
+9.       this.description = description;
+10.       this.priority = priority;
+11.       this.dateTime = dateTime;
+12.       this.imagePath = imagePath;
+13.    }
+14. }
+     Клас реалізує інтерфейс Serializable, що дозволяє передавати його між активностями. Повний код класу наведено в [ДОДАТОК А].
+     2. Реалізація адаптера NoteAdapter
+     Для зв’язку між даними та інтерфейсом розроблено адаптер NoteAdapter, який відповідає за відображення списку нотаток у RecyclerView та забезпечує методи додавання (addNote), редагування (updateNote) та пошуку (filter).
+     Додавання нотаток:
+1. public void addNote(Note note) {
+2.    notes.add(note);
+3.    notesFull.add(note); 
+4.    notifyItemInserted(notes.size() - 1);
+5. }
+	Редагування нотаток:
+1. public void updateNote(Note note, int position) {
+2.    notes.set(position, note);
+3.    int indexInFullList = notesFull.indexOf(notesFull.get(position));
+4.    if (indexInFullList != -1) {
+5.       notesFull.set(indexInFullList, note);
+6.    }
+7.    notifyItemChanged(position);
+8. }
+     Пошук у списку:
+1. public void filter(String query) {
+2.    notes.clear();
+3.    if (query == null || query.isEmpty()) {
+4.       notes.addAll(notesFull); // Відновлення оригінального списку
+5.    } else {
+6.       for (Note note : notesFull) {
+7.          if (note.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+8.          note.getDescription().toLowerCase().contains(query.toLowerCase())) {
+9.             notes.add(note);
+10.          }
+11.       }
+12.     }
+13.     notifyDataSetChanged();
+14. }
+	Повний код класу наведено в [ДОДАТОК Б].
+	3. Основний екран
+	На основному екрані відображається список нотаток із можливістю пошуку, сортування, додавання, редагування та видалення.
+	Додавання нотаток:
+1. fabAdd.setOnClickListener(view -> {
+2.    Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+3.    startActivityForResult(intent, 100);
+4. });
+	Редагування:
+1. noteAdapter.setOnItemClickListener((note, position) -> {
+2.    Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+3.    intent.putExtra("note", note);
+4.    intent.putExtra("position", position);
+5.    startActivityForResult(intent, 200);
+6. });
+     Видалення:
+1. private void showDeleteConfirmationDialog() {
+2.    new AlertDialog.Builder(this)
+3.    .setTitle(R.string.confirm_delete)
+4.    .setMessage(R.string.confirm_delete_message)
+5.    .setPositiveButton(R.string.yes, (dialog, which) -> {
+6.       notes.remove(selectedNotePosition);
+7.       noteAdapter.notifyItemRemoved(selectedNotePosition);
+8.    })
+9.    .setNegativeButton(R.string.no, null)
+10.    .show();
+11. }
+     Повний код MainActivity наведено в [ДОДАТОК В].
+	4. Додавання та редагування нотаток
+	Екран додавання та редагування реалізовано в NoteActivity. Реалізовано введення назви, опису та пріоритету, вибір дати й часу та вибір картинки з галереї.
+	Вибір дати й часу:
+1. btnSetDateTime.setOnClickListener(v -> showDateTimePicker());
+	Вибір картинки з галереї:
+1. ActivityResultLauncher<String> imagePickerLauncher = registerForActivityResult(
+2.    new ActivityResultContracts.GetContent(),
+3.    uri -> {
+4.        if (uri != null) {
+5.            imagePath = uri.toString();
+6.            ivImage.setImageURI(uri);
+7.        }
+8.    }
+9. );
+10. ivImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
+     Збереження нотатки:
+1. btnSave.setOnClickListener(v -> {
+2.   Note newNote = new Note(etTitle.getText().toString(), etDescription.getText().toString(),
+3.           spPriority.getSelectedItemPosition() + 1, tvDateTime.getText().toString(), imagePath);
+4.    Intent resultIntent = new Intent();
+5.    resultIntent.putExtra("note", newNote);
+6.    resultIntent.putExtra("position", position);
+7.    setResult(RESULT_OK, resultIntent);
+8.    finish();
+9. });
+	Повний код NoteActivity наведено в [ДОДАТОК Г].
+
+
+
+
+ВИСНОВКИ
+	Під час виконання лабораторної роботи №4 реалізовано повноцінний застосунок для введення нотаток. Освоєно використання різних елементів інтерфейсу, таких як SearchView, Spinner і RecyclerView, створення діалогових вікон і передавання значень. 
+Відеозвіт на YouTube. URL: https://youtu.be/9aHETw6TLvA?si=XSt2wp042bTzbgEN
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК А
+     Note.java:
+package com.example.android_pzpi_23_6_kiliarova_anna_lab_task4;
+
+import java.io.Serializable;
+
+public class Note implements Serializable {
+    private String title;
+    private String description;
+    private int priority; // 1 - Low, 2 - Medium, 3 - High
+    private String dateTime;
+    private String imagePath;
+
+    public Note(String title, String description, int priority, String dateTime, String imagePath) {
+        this.title = title;
+        this.description = description;
+        this.priority = priority;
+        this.dateTime = dateTime;
+        this.imagePath = imagePath;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+}
+
+ДОДАТОК Б
+     NoteAdapter.java:
+package com.example.android_pzpi_23_6_kiliarova_anna_lab_task4;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NoteAdapter extends RecyclerView.Adapter<NoteAdapter.NoteViewHolder> {
+
+    private List<Note> notes; // Поточний список нотаток
+    private final List<Note> notesFull; 
+    private final Context context;
+
+    public NoteAdapter(List<Note> notes, Context context) {
+        this.notes = notes;
+        this.context = context;
+        this.notesFull = new ArrayList<>(notes); // Копія для оригінального списку
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Note note, int position);
+    }
+
+    private OnItemClickListener listener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    @NonNull
+    @Override
+    public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_note, parent, false);
+        return new NoteViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
+        Note note = notes.get(position);
+        holder.tvTitle.setText(note.getTitle());
+        holder.tvDateTime.setText(note.getDateTime());
+        holder.ivPriority.setImageResource(getPriorityIcon(note.getPriority()));
+
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) {
+                int currentPosition = holder.getAdapterPosition();
+                if (currentPosition != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(notes.get(currentPosition), currentPosition);
+                }
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(v -> {
+            int currentPosition = holder.getAdapterPosition();
+            if (currentPosition != RecyclerView.NO_POSITION) {
+                ((MainActivity) context).selectedNotePosition = currentPosition;
+            }
+            return false;
+        });
+    }
+
+    private int getPriorityIcon(int priority) {
+        switch (priority) {
+            case 1:
+                return R.drawable.ic_priority_low;
+            case 2:
+                return R.drawable.ic_priority_medium;
+            case 3:
+                return R.drawable.ic_priority_high;
+            default:
+                return R.drawable.ic_priority_low;
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return notes.size();
+    }
+
+    public void filter(String query) {
+        if (query == null || query.isEmpty()) {
+            notes.clear();
+            notes.addAll(notesFull); 
+        } else {
+            String lowerCaseQuery = query.toLowerCase();
+            List<Note> filteredList = new ArrayList<>();
+            for (Note note : notesFull) {
+                if (note.getTitle().toLowerCase().contains(lowerCaseQuery) ||
+                        note.getDescription().toLowerCase().contains(lowerCaseQuery)) {
+                    filteredList.add(note);
+                }
+            }
+            notes.clear();
+            notes.addAll(filteredList); 
+        }
+        notifyDataSetChanged(); 
+    }
+
+    public void addNote(Note note) {
+        notes.add(note);
+        notesFull.add(note); 
+        notifyItemInserted(notes.size() - 1);
+    }
+
+    public void updateNote(Note note, int position) {
+        notes.set(position, note);
+        int indexInFullList = notesFull.indexOf(notesFull.get(position));
+        if (indexInFullList != -1) {
+            notesFull.set(indexInFullList, note); 
+        }
+        notifyItemChanged(position);
+    }
+
+    public static class NoteViewHolder extends RecyclerView.ViewHolder {
+
+        TextView tvTitle, tvDateTime;
+        ImageView ivPriority;
+
+        public NoteViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvDateTime = itemView.findViewById(R.id.tvDateTime);
+            ivPriority = itemView.findViewById(R.id.ivPriority);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК В
+     MainActivity.java:
+package com.example.android_pzpi_23_6_kiliarova_anna_lab_task4;
+
+import android.content.Intent;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.SearchView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
+
+    public int selectedNotePosition = -1; 
+    private RecyclerView recyclerView;
+    private NoteAdapter noteAdapter;
+    private List<Note> notes = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        FloatingActionButton fabAdd = findViewById(R.id.fabAdd);
+
+        noteAdapter = new NoteAdapter(notes, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(noteAdapter);
+
+        registerForContextMenu(recyclerView);
+
+        fabAdd.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+            startActivityForResult(intent, 100); // Код 100 для створення
+        });
+
+        noteAdapter.setOnItemClickListener((note, position) -> {
+            Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+            intent.putExtra("note", note);
+            intent.putExtra("position", position);
+            startActivityForResult(intent, 200);
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100 && resultCode == RESULT_OK) {
+            Note note = (Note) data.getSerializableExtra("note");
+            noteAdapter.addNote(note); // Додавання нової нотатки
+        } else if (requestCode == 200 && resultCode == RESULT_OK) {
+            Note note = (Note) data.getSerializableExtra("note");
+            int position = data.getIntExtra("position", -1);
+            if (position != -1) {
+                noteAdapter.updateNote(note, position);
+            }
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_delete) {
+            showDeleteConfirmationDialog(); 
+            return true;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void showDeleteConfirmationDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.confirm_delete)
+                .setMessage(R.string.confirm_delete_message)
+                .setPositiveButton(R.string.yes, (dialog, which) -> {
+                    notes.remove(selectedNotePosition);
+                    noteAdapter.notifyItemRemoved(selectedNotePosition); // Оновлення списку
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                noteAdapter.filter(query); // Пошук
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                noteAdapter.filter(newText); 
+                return true;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.sort_priority) {
+            sortNotesByPriority(); 
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void sortNotesByPriority() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Collections.sort(notes, Comparator.comparingInt(Note::getPriority).reversed());
+        }
+        noteAdapter.notifyDataSetChanged();
+    }
+}
+
+ДОДАТОК Г
+     NoteActivity.java:
+      package com.example.android_pzpi_23_6_kiliarova_anna_lab_task4;
+      
+      import android.app.DatePickerDialog;
+      import android.app.TimePickerDialog;
+      import android.content.Intent;
+      import android.net.Uri;
+      import android.os.Bundle;
+      import android.widget.Button;
+      import android.widget.EditText;
+      import android.widget.ImageView;
+      import android.widget.Spinner;
+      import android.widget.TextView;
+      
+      import androidx.activity.result.ActivityResultLauncher;
+      import androidx.activity.result.contract.ActivityResultContracts;
+      import androidx.appcompat.app.AppCompatActivity;
+      
+      import java.text.SimpleDateFormat;
+      import java.util.Calendar;
+      import java.util.Date;
+      import java.util.Locale;
+      
+      public class NoteActivity extends AppCompatActivity {
+      
+          private EditText etTitle, etDescription;
+          private Spinner spPriority;
+          private ImageView ivImage;
+          private TextView tvDateTime;
+          private String imagePath = "";
+          private Calendar appointmentCalendar = Calendar.getInstance();
+      
+          @Override
+          protected void onCreate(Bundle savedInstanceState) {
+              super.onCreate(savedInstanceState);
+              setContentView(R.layout.activity_note);
+      
+              etTitle = findViewById(R.id.etTitle);
+              etDescription = findViewById(R.id.etDescription);
+              spPriority = findViewById(R.id.spPriority);
+              ivImage = findViewById(R.id.ivImage);
+              tvDateTime = findViewById(R.id.tvDateTime);
+              Button btnSave = findViewById(R.id.btnSave);
+              Button btnSetDateTime = findViewById(R.id.btnSetDateTime);
+      
+              Intent intent = getIntent();
+              Note note = (Note) intent.getSerializableExtra("note");
+              int position = intent.getIntExtra("position", -1);
+      
+              if (note != null) {
+                  etTitle.setText(note.getTitle());
+                  etDescription.setText(note.getDescription());
+                  spPriority.setSelection(note.getPriority() - 1);
+                  imagePath = note.getImagePath();
+                  tvDateTime.setText(note.getDateTime());
+      
+                  if (imagePath != null && !imagePath.isEmpty()) {
+                      ivImage.setImageURI(Uri.parse(imagePath));
+                  }
+              }
+      
+              btnSetDateTime.setOnClickListener(v -> showDateTimePicker());
+      
+              ActivityResultLauncher<String> imagePickerLauncher = registerForActivityResult(
+                      new ActivityResultContracts.GetContent(),
+                      uri -> {
+                          if (uri != null) {
+                              imagePath = uri.toString();
+                              ivImage.setImageURI(uri);
+                          }
+                      }
+              );
+      
+              ivImage.setOnClickListener(v -> imagePickerLauncher.launch("image/*"));
+      
+              btnSave.setOnClickListener(v -> {
+                  String title = etTitle.getText().toString();
+                  String description = etDescription.getText().toString();
+                  int priority = spPriority.getSelectedItemPosition() + 1;
+                  String dateTime = tvDateTime.getText().toString();
+      
+                  Note newNote = new Note(title, description, priority, dateTime, imagePath);
+      
+                  Intent resultIntent = new Intent();
+                  resultIntent.putExtra("note", newNote);
+                  resultIntent.putExtra("position", position);
+                  setResult(RESULT_OK, resultIntent);
+                  finish();
+              });
+          }
+      
+          private void showDateTimePicker() {
+              new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
+                  appointmentCalendar.set(Calendar.YEAR, year);
+                  appointmentCalendar.set(Calendar.MONTH, month);
+                  appointmentCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+      
+                  new TimePickerDialog(this, (timeView, hourOfDay, minute) -> {
+                      appointmentCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                      appointmentCalendar.set(Calendar.MINUTE, minute);
+      
+                      String formattedDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
+                              .format(appointmentCalendar.getTime());
+                      tvDateTime.setText(formattedDateTime);
+                  }, appointmentCalendar.get(Calendar.HOUR_OF_DAY), appointmentCalendar.get(Calendar.MINUTE), true).show();
+      
+              }, appointmentCalendar.get(Calendar.YEAR), appointmentCalendar.get(Calendar.MONTH),
+                      appointmentCalendar.get(Calendar.DAY_OF_MONTH)).show();
+          }
+      }
+
+2
+
+
