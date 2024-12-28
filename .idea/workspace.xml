@@ -4,8 +4,87 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d804234b-794b-4bd6-b8f8-1a6cbc59031a" name="Changes" comment="add PractTask2">
+    <list default="true" id="38c4d96e-9b0e-4950-8992-efb09131fec9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/android-pzpi-23-6-kiliarova-anna.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_11_2024_22_02_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_30_11_2024_22_02__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/app/src/androidTest/java/com/example/android_pzpi_23_6_kiliarova_anna_lab_task2/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/app/src/test/java/com/example/android_pzpi_23_6_kiliarova_anna_lab_task2/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/app/src/androidTest/java/com/example/android_pzpi_23_6_kiliarova_anna_lab_task3/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/app/src/test/java/com/example/android_pzpi_23_6_kiliarova_anna_lab_task3/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask3/android-pzpi-23-6kiliarova-anna-lab-task3/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/src/androidTest/java/nure/kiliarova/anna/android_pzpi_23_6_kiliarova_anna_pract_task1/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/src/test/java/nure/kiliarova/anna/android_pzpi_23_6_kiliarova_anna_pract_task1/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/.idea/deploymentTargetSelector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/app/src/androidTest/java/nure/kiliarova/anna/android_pzpi_23_6_kiliarova_anna_pract_task2_part2/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/app/src/test/java/nure/kiliarova/anna/android_pzpi_23_6_kiliarova_anna_pract_task2_part2/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part2/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/.idea/deploymentTargetSelector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/app/src/androidTest/java/nure/kiliarova/anna/android_pzpi_23_6_kiliarova_anna_pract_task2_part3/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/app/src/test/java/nure/kiliarova/anna/android_pzpi_23_6_kiliarova_anna_pract_task2_part3/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/gradle/libs.versions.toml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask2/android-pzpi-23-6-kiliarova-anna-pract-task2-part3/settings.gradle.kts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,70 +97,60 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;NureKiliarovaAnna&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "NureKiliarovaAnna"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/NureKiliarovaAnna/android-pzpi-23-6-kiliarova-anna.git&quot;,
-    &quot;accountId&quot;: &quot;ac830764-9efa-4420-930a-798117699550&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/NureKiliarovaAnna/android-pzpi-23-6-kiliarova-anna.git",
+    "accountId": "ac830764-9efa-4420-930a-798117699550"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
 }</component>
-  <component name="ProjectId" id="2paGRKMLraNraTh9if0jsyhPfwY" />
+  <component name="ProjectId" id="2qp0d8q6gUGjKSVr6oJhaz7Pmt8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kilya/android-pzpi-23-6-kiliarova-anna&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/android-pzpi-23-6-kiliarova-anna"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d804234b-794b-4bd6-b8f8-1a6cbc59031a" name="Changes" comment="" />
-      <created>1732996768291</created>
+      <changelist id="38c4d96e-9b0e-4950-8992-efb09131fec9" name="Changes" comment="" />
+      <created>1735344299697</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1732996768291</updated>
+      <updated>1735344299697</updated>
     </task>
-    <task id="LOCAL-00001" summary="add .txt">
-      <option name="closed" value="true" />
-      <created>1732996900866</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1732996900866</updated>
-    </task>
-    <task id="LOCAL-00002" summary="add PractTask2">
-      <option name="closed" value="true" />
-      <created>1735235991857</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1735235991857</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="add .txt" />
-    <MESSAGE value="add PractTask2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add PractTask2" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
