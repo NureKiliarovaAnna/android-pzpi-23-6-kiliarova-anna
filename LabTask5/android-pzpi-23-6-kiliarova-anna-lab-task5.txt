@@ -1,0 +1,248 @@
+﻿Міністерство освіти і науки України
+Харківський національний університет радіоелектроніки
+
+
+
+Кафедра ПІ
+
+
+
+
+Звіт
+з лабораторної роботи №5
+з дисципліни «Програмування під Android»
+   
+
+
+
+
+
+Виконала:                                                                   Перевірив:
+ст. гр. ПЗПІ-23-6                        		             ст. викладач кафедри ПІ
+Кілярова А. П.						   Сокорчук І. П.
+
+
+
+
+
+
+
+
+Харків 2024
+ЗАВДАННЯ
+
+     Доповнити завдання №4 наступними функціями:
+     1. Реалізувати різне відображення для портретної та ланшафтної орієнтації екрану за допомогою тих самих фрагментів;
+     2. Створити дві редаговані теми (тло, гарнітура шрифту, колір тексту тощо) і застосовувати їх в залежності від налаштувань програми.
+     3. Додати можливість задавати в налаштуваннях програми розмір шрифту.
+     4. Переробити завдання №4 так, щоб дані нотаток зберігалися у базі даних SQLite.
+
+ХІД РОБОТИ
+     1. Реалізація стилів
+     Прописуємо 3 різні стилі, які змінюють розмір шрифту для тексту і створюємо вікно налаштувань activity_settings [ДОДАТОК А].
+     SettingsActivity.java:
+      1. public class SettingsActivity extends AppCompatActivity {
+      
+      2.    @Override
+      3.    protected void onCreate(Bundle savedInstanceState) {
+      4.        super.onCreate(savedInstanceState);
+      5.        setContentView(R.layout.activity_settings);
+      6.        RadioGroup fontSizeGroup = findViewById(R.id.radioGroupFontSize);
+7.        SharedPreferences preferences = getSharedPreferences("AppSettings", MODE_PRIVATE);
+      8.        String currentFontSize = preferences.getString("font_size", "medium");
+      9.        if (currentFontSize.equals("small")) {
+      10.            fontSizeGroup.check(R.id.radioSmall);
+      11.        } else if (currentFontSize.equals("large")) {
+      12.            fontSizeGroup.check(R.id.radioLarge);
+      13.        } else {
+      14.            fontSizeGroup.check(R.id.radioMedium);
+      15.        }
+      16.        fontSizeGroup.setOnCheckedChangeListener((group, checkedId) -> {
+      17.            SharedPreferences.Editor editor = preferences.edit();
+      18.            if (checkedId == R.id.radioSmall) {
+      19.                editor.putString("font_size", "small");
+      20.            } else if (checkedId == R.id.radioLarge) {
+      21.                editor.putString("font_size", "large");
+      22.            } else {
+      23.               editor.putString("font_size", "medium");
+      24.            }
+      25.            editor.apply();
+      26.        });
+      27.    }
+      28.}
+     2. Реалізація різного відображення для портретної та ланшафтної орієнтації
+     Створимо layout-land для файлу activity_note:
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingEnd="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/etTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/note_title"
+                android:inputType="text"
+                android:padding="20dp" />
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/note_description"
+                android:inputType="textMultiLine"
+                android:padding="8dp"
+                android:minLines="3" />
+
+            <Spinner
+                android:id="@+id/spPriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/priority_levels"
+                android:padding="20dp" />
+
+            <TextView
+                android:id="@+id/tvDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/appointment_time"
+                android:padding="8dp"
+                android:textColor="@android:color/darker_gray" />
+
+            <Button
+                android:id="@+id/btnSetDateTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/set_date_time" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:paddingStart="8dp">
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="456dp"
+            android:layout_height="313dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/note_image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_placeholder" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save" />
+    </LinearLayout>
+</LinearLayout>
+     
+     Аналогічно додамо layout-land для кожного xml-файлу.
+	3. Редаговані теми в залежності від налаштувань
+	Створимо в папці values налаштування themes для темної і світлої теми пристрою.
+	
+
+
+
+
+
+
+
+
+
+
+ВИСНОВКИ
+	Під час виконання лабораторної роботи №5 реалізовано повноцінний застосунок для введення нотаток. Освоєно використання різних елементів інтерфейсу.
+Відеозвіт на YouTube. URL: https://youtu.be/GiDwnv-aVvE?si=x2qe8TPCt0hLJLl4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ДОДАТОК А
+     activity_settings.xml:
+      <LinearLayout
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical"
+          android:padding="16dp">
+      
+          <TextView
+              android:id="@+id/tvFontSize"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="@string/font_size"
+              android:textSize="18sp"
+              android:layout_marginBottom="8dp" />
+      
+          <RadioGroup
+              android:id="@+id/radioGroupFontSize"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+      
+              <RadioButton
+                  android:id="@+id/radioSmall"
+                  android:layout_width="wrap_content"
+                  android:layout_height="48dp"
+                  android:text="@string/small"
+                  android:minHeight="48dp"
+                  android:paddingStart="16dp" />
+      
+              <RadioButton
+                  android:id="@+id/radioMedium"
+                  android:layout_width="wrap_content"
+                  android:layout_height="48dp"
+                  android:text="@string/medium"
+                  android:minHeight="48dp"
+                  android:paddingStart="16dp" />
+      
+              <RadioButton
+                  android:id="@+id/radioLarge"
+                  android:layout_width="wrap_content"
+                  android:layout_height="48dp"
+                  android:text="@string/large"
+                  android:minHeight="48dp"
+                  android:paddingStart="16dp" />
+          </RadioGroup>
+      </LinearLayout>
+2
+
+
