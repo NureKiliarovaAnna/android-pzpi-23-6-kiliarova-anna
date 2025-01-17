@@ -22,13 +22,55 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        initializeViews();
+        setupInsets();
+        setupListeners();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    private void initializeViews() {
+        tvResult = findViewById(R.id.tvResult);
+    }
+
+    private void setupInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        tvResult = findViewById(R.id.tvResult);
+    }
 
+    private void setupListeners() {
         View.OnClickListener numberClickListener = view -> {
             Button button = (Button) view;
             currentNumber += button.getText().toString();
@@ -63,31 +105,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnEquals).setOnClickListener(view -> {
             if (!currentNumber.isEmpty() && !operator.isEmpty()) {
                 double secondOperand = Double.parseDouble(currentNumber);
-                double result = 0;
-
-                switch (operator) {
-                    case "+":
-                        result = firstOperand + secondOperand;
-                        break;
-                    case "-":
-                        result = firstOperand - secondOperand;
-                        break;
-                    case "*":
-                        result = firstOperand * secondOperand;
-                        break;
-                    case "/":
-                        if (secondOperand != 0) {
-                            result = firstOperand / secondOperand;
-                        } else {
-                            tvResult.setText("Error");
-                            return;
-                        }
-                        break;
+                double result = calculateResult(firstOperand, secondOperand, operator);
+                if (Double.isNaN(result)) {
+                    tvResult.setText("Error");
+                } else {
+                    tvResult.setText(String.valueOf(result));
+                    currentNumber = String.valueOf(result);
                 }
-
-
-                tvResult.setText(String.valueOf(result));
-                currentNumber = String.valueOf(result);
                 operator = "";
             }
         });
@@ -100,10 +124,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.btnClear).setOnClickListener(view -> {
-            currentNumber = "";
-            operator = "";
-            firstOperand = 0;
-            tvResult.setText("0");
+            resetCalculator();
         });
+    }
+
+    private double calculateResult(double firstOperand, double secondOperand, String operator) {
+        switch (operator) {
+            case "+":
+                return firstOperand + secondOperand;
+            case "-":
+                return firstOperand - secondOperand;
+            case "*":
+                return firstOperand * secondOperand;
+            case "/":
+                return secondOperand != 0 ? firstOperand / secondOperand : Double.NaN;
+            default:
+                return Double.NaN;
+        }
+    }
+
+    private void resetCalculator() {
+        currentNumber = "";
+        operator = "";
+        firstOperand = 0;
+        tvResult.setText("0");
     }
 }

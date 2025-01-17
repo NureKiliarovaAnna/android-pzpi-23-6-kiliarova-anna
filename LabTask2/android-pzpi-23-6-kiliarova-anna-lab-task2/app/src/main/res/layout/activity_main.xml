@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:gravity="center">
+    android:gravity="center_horizontal">
 
     <View
         android:id="@+id/color_panel"
-        android:layout_width="411dp"
-        android:layout_height="22dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="2"
         android:background="#000000" />
 
@@ -20,26 +20,28 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingVertical="8dp">
 
         <SeekBar
             android:id="@+id/seekBarRed"
             android:layout_width="match_parent"
-            android:layout_height="92dp"
+            android:layout_height="66dp"
             android:max="255"
             android:progress="0" />
 
         <SeekBar
             android:id="@+id/seekBarGreen"
             android:layout_width="match_parent"
-            android:layout_height="77dp"
+            android:layout_height="62dp"
             android:max="255"
             android:progress="0" />
 
         <SeekBar
             android:id="@+id/seekBarBlue"
             android:layout_width="match_parent"
-            android:layout_height="49dp"
+            android:layout_height="68dp"
             android:max="255"
             android:progress="0" />
 
