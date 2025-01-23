@@ -8,17 +8,19 @@
     android:padding="16dp">
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Натисніть мене"
-        android:layout_marginBottom="16dp"/>
+        android:id="@+id/changeTextButton"
+        android:layout_width="167dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="16dp"
+        android:text="Change Text"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Цей текст зміниться"
-        android:textSize="18sp"/>
+        android:id="@+id/displayText"
+        android:layout_width="165dp"
+        android:layout_height="50dp"
+        android:text="Initial Text"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

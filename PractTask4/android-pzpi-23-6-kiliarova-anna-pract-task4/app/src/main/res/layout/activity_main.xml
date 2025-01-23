@@ -1,65 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#E3F2FD">
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/nameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введіть ім'я"
-        android:minHeight="48dp" />
+        android:hint="Ім'я"
+        android:padding="14dp"
+        android:background="@android:color/white"
+        android:layout_marginBottom="12dp"
+        android:textColor="#212121"
+        android:textColorHint="#9E9E9E"
+        android:elevation="3dp" />
 
     <EditText
-        android:id="@+id/etAge"
+        android:id="@+id/ageInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etName"
-        android:layout_marginTop="8dp"
-        android:hint="Введіть вік"
+        android:hint="Вік"
         android:inputType="number"
-        android:minHeight="48dp" />
+        android:padding="14dp"
+        android:background="@android:color/white"
+        android:layout_marginBottom="18dp"
+        android:textColor="#212121"
+        android:textColorHint="#9E9E9E"
+        android:elevation="3dp" />
 
     <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
+        android:id="@+id/saveDataButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/etAge"
-        android:layout_marginTop="16dp"
-        android:text="Зберегти" />
+        android:layout_marginBottom="16dp"
+        android:text="Зберегти дані"
+        android:textColor="@android:color/white"
+        android:background="#388E3C"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:elevation="6dp" />
 
     <TextView
-        android:id="@+id/tvResult"
+        android:id="@+id/displayTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnSave"
-        android:layout_marginTop="16dp"
-        android:textSize="18sp" />
+        android:layout_marginBottom="20dp"
+        android:textSize="18sp"
+        android:textColor="#424242"
+        android:padding="8dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp" />
 
-    <Button
-        android:id="@+id/btnShow"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnSave"
-        android:layout_marginTop="168dp"
-        android:text="Показати користувачів" />
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:weightSum="3">
 
-    <Button
-        android:id="@+id/btnWriteFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnShow"
-        android:layout_marginTop="-1dp"
-        android:text="Записати у файл" />
+        <Button
+            android:id="@+id/viewUsersButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Користувачі"
+            android:background="#0288D1"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:elevation="4dp" />
 
-    <Button
-        android:id="@+id/btnReadFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnWriteFile"
-        android:layout_marginTop="-1dp"
-        android:text="Читати з файлу" />
+        <Button
+            android:id="@+id/saveFileButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="В файл"
+            android:background="#FF5722"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:elevation="4dp" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/loadFileButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="З файлу"
+            android:background="#7B1FA2"
+            android:textColor="@android:color/white"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:elevation="4dp" />
+    </LinearLayout>
+
+</LinearLayout>

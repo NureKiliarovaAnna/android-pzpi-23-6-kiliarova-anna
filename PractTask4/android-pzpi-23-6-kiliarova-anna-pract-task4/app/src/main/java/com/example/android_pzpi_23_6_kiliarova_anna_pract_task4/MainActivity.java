@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,106 +16,150 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
-    EditText etName, etAge;
-    Button btnSavePrefs, btnShowUsers, btnSaveFile, btnReadFile;
-    TextView tvResult;
-    SharedPreferences sharedPreferences;
-    DBHelper dbHelper;
+    private EditText inputName, inputAge;
+    private Button btnSaveData, btnViewUsers, btnSaveToFile, btnLoadFromFile;
+    private TextView displayTextView;
+    private SharedPreferences userPreferences;
+    private DataManager databaseManager;
+
+    private static final String PREFERENCES_NAME = "UserDetails";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etName = findViewById(R.id.etName);
-        etAge = findViewById(R.id.etAge);
-        btnSavePrefs = findViewById(R.id.btnSave);
-        btnShowUsers = findViewById(R.id.btnShow);
-        btnSaveFile = findViewById(R.id.btnWriteFile);
-        btnReadFile = findViewById(R.id.btnReadFile);
-        tvResult = findViewById(R.id.tvResult);
+        initializeViews();
 
-        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        dbHelper = new DBHelper(this);
+        userPreferences = getSharedPreferences(PREFERENCES_NAME, MODE_PRIVATE);
+        databaseManager = new DataManager(this);
 
-        loadSharedPrefs();
+        loadPreferences();
 
-        btnSavePrefs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveToSharedPrefs();
-            }
+        btnSaveData.setOnClickListener(v -> {
+            savePreferences();
+            saveToDatabase();
         });
 
-        btnSavePrefs.setOnClickListener(v -> saveToSQLite());
-        btnShowUsers.setOnClickListener(v -> displayUsers());
+        btnViewUsers.setOnClickListener(v -> showUsersFromDatabase());
 
-        btnSaveFile.setOnClickListener(v -> writeFile());
-        btnReadFile.setOnClickListener(v -> readFile());
+        btnSaveToFile.setOnClickListener(v -> saveToFile());
+
+        btnLoadFromFile.setOnClickListener(v -> loadFromFile());
     }
 
-    private void saveToSharedPrefs() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name", etName.getText().toString());
-        editor.putInt("age", Integer.parseInt(etAge.getText().toString()));
+    private void initializeViews() {
+        inputName = findViewById(R.id.nameInput);
+        inputAge = findViewById(R.id.ageInput);
+        btnSaveData = findViewById(R.id.saveDataButton);
+        btnViewUsers = findViewById(R.id.viewUsersButton);
+        btnSaveToFile = findViewById(R.id.saveFileButton);
+        btnLoadFromFile = findViewById(R.id.loadFileButton);
+        displayTextView = findViewById(R.id.displayTextView);
+    }
+
+    private void savePreferences() {
+        SharedPreferences.Editor editor = userPreferences.edit();
+        editor.putString("userName", inputName.getText().toString());
+        editor.putInt("userAge", Integer.parseInt(inputAge.getText().toString()));
         editor.apply();
-        loadSharedPrefs();
+        loadPreferences();
     }
 
-    private void loadSharedPrefs() {
-        String name = sharedPreferences.getString("name", "Немає даних");
-        int age = sharedPreferences.getInt("age", 0);
-        tvResult.setText("Ім'я: " + name + ", Вік: " + age);
+    private void loadPreferences() {
+        String name = userPreferences.getString("userName", "No Data");
+        int age = userPreferences.getInt("userAge", 0);
+        displayTextView.setText("Name: " + name + ", Age: " + age);
     }
 
-    private void saveToSQLite() {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
+    private void saveToDatabase() {
+        SQLiteDatabase db = databaseManager.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("name", etName.getText().toString());
-        values.put("age", Integer.parseInt(etAge.getText().toString()));
+        values.put("name", inputName.getText().toString());
+        values.put("age", Integer.parseInt(inputAge.getText().toString()));
 
         long result = db.insert("users", null, values);
         if (result != -1) {
-            Toast.makeText(this, "Користувача збережено!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Data saved successfully!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Failed to save data!", Toast.LENGTH_SHORT).show();
         }
         db.close();
     }
 
-    private void displayUsers() {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+    private void showUsersFromDatabase() {
+        SQLiteDatabase db = databaseManager.getReadableDatabase();
         Cursor cursor = db.query("users", null, null, null, null, null, null);
 
         StringBuilder data = new StringBuilder();
-        while (cursor.moveToNext()) {
-            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-            int age = cursor.getInt(cursor.getColumnIndexOrThrow("age"));
-            data.append("Ім'я: ").append(name).append(", Вік: ").append(age).append("\n");
+        if (cursor.moveToFirst()) {
+            int nameIndex = cursor.getColumnIndex("name");
+            int ageIndex = cursor.getColumnIndex("age");
+
+            do {
+                String name = cursor.getString(nameIndex);
+                int age = cursor.getInt(ageIndex);
+                data.append("Name: ").append(name).append(", Age: ").append(age).append("\n");
+            } while (cursor.moveToNext());
+        } else {
+            data.append("No data available.");
         }
-        tvResult.setText(data.toString());
+
+        displayTextView.setText(data.toString());
         cursor.close();
         db.close();
     }
 
-    private void writeFile() {
-        String text = etName.getText().toString();
-        try (FileOutputStream fos = openFileOutput("user_data.txt", MODE_PRIVATE)) {
-            fos.write(text.getBytes());
-            Toast.makeText(this, "Дані записано у файл", Toast.LENGTH_SHORT).show();
+    private void saveToFile() {
+        String data = inputName.getText().toString();
+        try (FileOutputStream fos = openFileOutput("userdata.txt", MODE_PRIVATE)) {
+            fos.write(data.getBytes());
+            Toast.makeText(this, "File saved!", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void readFile() {
-        try (FileInputStream fis = openFileInput("user_data.txt")) {
+    private void loadFromFile() {
+        try (FileInputStream fis = openFileInput("userdata.txt")) {
             int c;
-            StringBuilder temp = new StringBuilder();
+            StringBuilder fileData = new StringBuilder();
             while ((c = fis.read()) != -1) {
-                temp.append((char) c);
+                fileData.append((char) c);
             }
-            tvResult.setText(temp.toString());
+            displayTextView.setText(fileData.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 }

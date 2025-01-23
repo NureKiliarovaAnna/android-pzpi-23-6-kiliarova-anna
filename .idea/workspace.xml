@@ -6,7 +6,35 @@
   <component name="ChangeListManager">
     <list default="true" id="38c4d96e-9b0e-4950-8992-efb09131fec9" name="Changes" comment="add lab2,3">
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/deploymentTargetSelector.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/migrations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/proguard-rules.pro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/src/androidTest/java/nure/kiliarova/anna/lab_task1/ExampleInstrumentedTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/src/main/java/nure/kiliarova/anna/lab_task1/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/app/src/test/java/nure/kiliarova/anna/lab_task1/ExampleUnitTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/build.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/gradle.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-23-6-kiliarova-anna-lab-task1/settings.gradle.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask1/android-pzpi-6-kiliarova-anna-lab-task1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LabTask1/android-pzpi-6-kiliarova-anna-lab-task1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/LabTask2/android-pzpi-23-6-kiliarova-anna-lab-task2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/src/main/java/nure/kiliarova/anna/android_pzpi_23_6_kiliarova_anna_pract_task1/MainActivity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PractTask1/android-pzpi-23-6-kiliarova-anna-pract-task1/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask4/android-pzpi-23-6-kiliarova-anna-pract-task4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/PractTask4/android-pzpi-23-6-kiliarova-anna-pract-task4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask4/android-pzpi-23-6-kiliarova-anna-pract-task4/app/src/main/java/com/example/android_pzpi_23_6_kiliarova_anna_pract_task4/DBHelper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask4/android-pzpi-23-6-kiliarova-anna-pract-task4/app/src/main/java/com/example/android_pzpi_23_6_kiliarova_anna_pract_task4/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/PractTask4/android-pzpi-23-6-kiliarova-anna-pract-task4/app/src/main/java/com/example/android_pzpi_23_6_kiliarova_anna_pract_task4/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PractTask4/android-pzpi-23-6-kiliarova-anna-pract-task4/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PractTask4/android-pzpi-23-6-kiliarova-anna-pract-task4/app/src/main/res/layout/activity_main.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737127211818</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add lab2,3">
+      <option name="closed" value="true" />
+      <created>1737128871074</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1737128871074</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

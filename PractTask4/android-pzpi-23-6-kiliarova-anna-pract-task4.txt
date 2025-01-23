@@ -29,9 +29,8 @@
 
 Харків 2024
 ЗАВДАННЯ
-1.	Ознайомитися з роботою SharedPreferences для збереження налаштувань застосунку.
-2.	Опанувати роботу з базою даних SQLite: створення, збереження та отримання даних.
-3.	Вивчити роботу з файлами для збереження даних у внутрішній або зовнішній пам'яті.
+     Ознайомитися з роботою SharedPreferences для збереження налаштувань застосунку, опанувати роботу з базою даних SQLite (створення, збереження та отримання даних), вивчити роботу з файлами для збереження даних у внутрішній або зовнішній пам'яті.
+
 
 
 
@@ -51,27 +50,34 @@
 
 
 ХІД РОБОТИ
-     Cтворюємо новий проєкт та обираємо Empty Views Activity.
-     SharedPreferences — це простий спосіб зберігати пари "ключ-значення", які зазвичай використовуються для збереження налаштувань застосунку або невеликих даних користувача. Файл налаштувань зберігається у вигляді XML у внутрішній пам'яті застосунку. 
-     Реалізація роботи із SharedPreferences
-     Створено методи saveToSharedPrefs() для збереження даних і loadSharedPrefs() для їх завантаження. Після збереження інформації дані автоматично завантажуються і відображаються на екрані.
-     Код збереження у SharedPreferences
-1. private void saveToSharedPrefs() {
+     Для збереження та завантаження користувацьких даних реалізовано механізм роботи з SharedPreferences. Створено методи:
+- savePreferences() для запису даних (ім'я та вік) у SharedPreferences;
+- loadPreferences() для їх зчитування та відображення.
+     Дані зберігаються у файлі налаштувань, що дозволяє забезпечити зручність збереження невеликих обсягів інформації. Після збереження дані одразу відображаються у текстовому полі.
+     Код збереження даних у SharedPreferences:
+       
+1. private void savePreferences() {
 2.    SharedPreferences.Editor editor = sharedPreferences.edit();
 3.    editor.putString("name", etName.getText().toString());
 4.    editor.putInt("age", Integer.parseInt(etAge.getText().toString()));
 5.    editor.apply();
 6.    loadSharedPrefs();
 7. }
-     Код завантаження з SharedPreferences:
-1.  private void loadSharedPrefs() {
-2.     String name = sharedPreferences.getString("name", "Немає даних");
-3.     int age = sharedPreferences.getInt("age", 0);
-4.     tvResult.setText("Ім'я: " + name + ", Вік: " + age);
+     
+     Код завантаження даних з SharedPreferences:
+     
+1.  private void loadPreferences () {
+2.     String name = userPreferences.getString("userName", "No Data");
+3.     int age = userPreferences.getInt("userAge", 0);
+4.     displayTextView.setText("Name: " + name + ", Age: " + age);
 5. }
+     
      Робота із SQLite
-     Для роботи з базою даних створено клас DBHelper, який розширює SQLiteOpenHelper. Реалізовано методи для додавання записів у таблицю users та відображення даних.
-     Код збереження до SQLite:
+     Для роботи з базою даних використовується клас DataManager, який розширює SQLiteOpenHelper. База даних містить таблицю users, де зберігаються ім'я та вік користувачів.
+- метод saveToDatabase(): дозволяє додавати нові записи у таблицю users;
+- метод showUsersFromDatabase(): відображає всі записи з таблиці.
+     Код збереження даних у базу:
+
 1.	    private void saveToSQLite() {
 2.	        SQLiteDatabase db = dbHelper.getWritableDatabase();
 3.	        ContentValues values = new ContentValues();
@@ -84,48 +90,88 @@
 10.	        }
 11.	        db.close();
 12.	    } 
+     
      Код відображення збережених даних:
-1.  private void displayUsers() {
-2.     SQLiteDatabase db = dbHelper.getReadableDatabase();
+     
+1.  private void showUsersFromDatabase() {
+2.     SQLiteDatabase db = databaseManager.getReadableDatabase();
 3.     Cursor cursor = db.query("users", null, null, null, null, null, null);
 4.
 5.     StringBuilder data = new StringBuilder();
-6.     while (cursor.moveToNext()) {
-7.         String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-8.         int age = cursor.getInt(cursor.getColumnIndexOrThrow("age"));
-9.         data.append("Ім'я: ").append(name).append(", Вік:").append(age).append("\n");
-10.     }
-11.     tvResult.setText(data.toString());
-12.     cursor.close();
-13.     db.close();
-14. }
+6.     if (cursor.moveToFirst()) {
+7.        int nameIndex = cursor.getColumnIndex("name");
+8.        int ageIndex = cursor.getColumnIndex("age");
+9.        do {
+10.            String name = cursor.getString(nameIndex);
+11.            int age = cursor.getInt(ageIndex);
+12.            data.append("Name: ").append(name).append(", Age: ").append(age).append("\n");
+13.        } while (cursor.moveToNext());
+14.    } else {
+15.        data.append("No data available.");
+16.    }
+17.     displayTextView.setText(data.toString());
+18.     cursor.close();
+19.     db.close();
+20. }
+
      Робота із файлами
-     Для запису даних у файл використано клас FileOutputStream. Реалізовано можливість збереження тексту у файл і його читання.
-     Збереження до файлу:
-1. private void writeFile() {
-2.     String text = etName.getText().toString();
-3.    try (FileOutputStream fos = openFileOutput("user_data.txt", MODE_PRIVATE)) {
-4.        fos.write(text.getBytes());
-5.        Toast.makeText(this, "Дані записано у файл", 
-6. Toast.LENGTH_SHORT).show();
-7.    } catch (IOException e) {
-8.         e.printStackTrace();
-9.      }
-10. }
+     Для збереження даних у файл використовується клас FileOutputStream, а для їх завантаження — FileInputStream:
+- метод saveToFile(): записує ім'я користувача у файл userdata.txt;
+- метод loadFromFile(): читає вміст файлу та відображає його на екрані.
+     Код збереження у файл:
+1. private void saveToFile () {
+2.     String data = inputName.getText().toString();
+3.    try (FileOutputStream fos = openFileOutput("userdata.txt", MODE_PRIVATE)) {
+4.        fos.write(data.getBytes());
+5.        Toast.makeText(this, "File saved!", Toast.LENGTH_SHORT).show();
+6.    } catch (IOException e) {
+7.         e.printStackTrace();
+8.      }
+9. }
+     
      Читання з файлу:
-1. try (FileInputStream fis = openFileInput("user_data.txt")) {
-2.     int c;
-3.     StringBuilder temp = new StringBuilder();
-4.     while ((c = fis.read()) != -1) {
-5.         temp.append((char) c);
-6.     }
-7.     tvResult.setText(temp.toString());
-8. } 
+     
+1. private void loadFromFile() {
+2.    try (FileInputStream fis = openFileInput("userdata.txt")) {
+3.        int c;
+4.        StringBuilder fileData = new StringBuilder();
+5.        while ((c = fis.read()) != -1) {
+6.            fileData.append((char) c);
+7.        }
+8.        displayTextView.setText(fileData.toString());
+9.    } catch (IOException e) {
+10.        e.printStackTrace();
+11.    }
+12.}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ВИСНОВКИ
-     Під час виконання практичної роботи було створено Android-застосунок для роботи з різними методами збереження даних: SharedPreferences, SQLite та файлами. Це дозволило засвоїти основні принципи організації локального збереження даних, а також навички роботи з базами даних і файловою системою в Android.
-Відеозвіт на YouTube. URL: https://youtu.be/ZYa7Fo-5HYM?si=P-uC2a4_52NKMUGr
+     У рамках виконання практичного завдання було створено Android-застосунок, що реалізує різні методи збереження даних: SharedPreferences, SQLite, та файли. Це дозволило закріпити навички роботи із локальними сховищами даних, організувати їх збереження та доступ, а також забезпечити базові механізми роботи з базами даних та файловою системою.
+     Відеозвіт на YouTube. URL: https://youtu.be/ZYa7Fo-5HYM?si=P-uC2a4_52NKMUGr
 
 
 
